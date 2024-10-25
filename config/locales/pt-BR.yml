@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      movie: Filme
+
+    attributes:
+      index: Lista de filmes
+      movie:
+        title: Título
+        decription: Descrição
+        release_year: Data de lançamento

@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: biblioteca_de_filmes
+  host: railsondocker-postgres-1
+  port: 5432
+  username: postgres
+  password: postgres
+
+test:
+  <<: *default
+  database: biblioteca_de_filmes_test
+  host: railsondocker-postgres-1
+  port: 5432
+  username: postgres
+  password: postgres

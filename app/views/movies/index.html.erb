@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<p> Olá <%=user_signed_in? ? current_user.email : 'visitante' %></p> 
+
+<%= button_to "Sair", destroy_user_session_path, method: :delete %>
+
+<h1><%= t('activerecord.attributes.index') %></h1>
+
+<div id="movies">
+  <% @movies.each do |movie| %>
+    <%= render movie %>
+    <p>
+      <%= link_to "Show this movie", movie %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New movie", new_movie_path %>
