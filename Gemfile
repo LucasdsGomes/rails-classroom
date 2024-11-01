@@ -32,6 +32,7 @@ gem 'i18n'
 
 # Gem for user authentication
 gem 'devise'
+gem 'image_processing', '>= 1.2'
 
 # Gem for fake input fill
 gem 'faker'
@@ -58,8 +59,9 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do

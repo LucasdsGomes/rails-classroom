@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_movie, only: %i[show edit update destroy]
@@ -65,6 +67,6 @@ class MoviesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def movie_params
-    params.require(:movie).permit(:title, :description, :release_year)
+    params.require(:movie).permit(:title, :description, :release_year, photos: [])
   end
 end

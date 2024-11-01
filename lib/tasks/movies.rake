@@ -5,7 +5,7 @@ namespace :populate do
       Movie.create(
         title: Faker::Movie.title,
         description: Faker::Name.name,
-        release_year: Faker::Date.between(from: '1900-01-01', to: '2024-01-01')
+        release_year: Faker::Date.between(from: '1900-01-01', to: Time.zone.today)
       )
     end
     puts "Filmes cadastrados com sucesso"
