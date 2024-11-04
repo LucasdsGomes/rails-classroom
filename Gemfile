@@ -36,6 +36,8 @@ gem 'image_processing', '>= 1.2'
 
 # Gem for fake input fill
 gem 'faker'
+gem "sassc-rails"
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

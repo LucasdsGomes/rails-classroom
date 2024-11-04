@@ -10,7 +10,9 @@ class MoviesController < ApplicationController
   end
 
   # GET /movies/1 or /movies/1.json
-  def show; end
+  def show
+    @movie = Movie.find(params[:id])
+  end
 
   # GET /movies/new
   def new
@@ -58,15 +60,22 @@ class MoviesController < ApplicationController
     end
   end
 
+  # Use callbacks to share common setup or constraints between actions.
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_movie
     @movie = MovieFilter.search_by_id(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def movie_params
-    params.require(:movie).permit(:title, :description, :release_year, photos: [])
+    params.require(:movie).permit(:title, :director, :release_date, photos: []) # :description
+  end
+
+  def destroy_photo
+    @movie = Movie.find(params[:id])
+    photo = @movie.photos.find_by_id(params[:photo_id])
+    photo.purge # Remove a foto do Active Storage
+    redirect_to movie_path(@movie), notice: 'Foto removida com sucesso.'
   end
 end

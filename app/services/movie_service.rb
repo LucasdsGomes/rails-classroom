@@ -5,7 +5,14 @@ class MovieService
     end
 
     def update(movie, movie_params)
-      movie.update(movie_params)
+      if movie.update(movie_params.except(:photos))
+        if movie_params[:photos].present?
+          movie.photos.attach(movie_params[:photos])
+        end
+        true
+      else
+        false
+      end
     end
 
     def delete(movie)

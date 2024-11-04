@@ -6,4 +6,12 @@ Rails.application.routes.draw do
 
   # root representa a página inicial do projeto localhost:3000
   root 'movies#index'
+
+  resources :movies do
+    member do
+    delete 'photos/:photo_id', to: 'movies#destroy_photo', as:
+    'destroy_photo'
+    end
+  end
+    
 end
