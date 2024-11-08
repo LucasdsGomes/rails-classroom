@@ -1,17 +1,29 @@
-<div id="<%= dom_id movie %>">
-  <p>
-    <strong>Title:</strong>
-    <%= movie.title %>
-  </p>
+<div class="card movie-card mb-4" id="<%= dom_id(movie) %>">
+  <div class="card-body">
+    <% if @movie && @movie.photos.attached? %>
+      <div class="photo-gallery mb-3">
+        <% @movie.photos.each do |photo| %>
+          <div class="photo-item">
+            <%= image_tag photo, class: "img-fluid rounded" %>
+            <%= button_to t('actions.delete'), destroy_photo_movie_path(@movie, photo_id: photo.id),
+                          method: :delete, 
+                          data: { confirm: 'Tem certeza de que deseja excluir esta foto?' },
+                          class: 'btn btn-danger btn-sm mt-2' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= movie.description %>
-  </p>
+    <h5 class="card-title"><strong><%= t('activerecord.attributes.movie.title') %>:</strong> <%= movie.title %></h5>
 
-  <p>
-    <strong>Release year:</strong>
-    <%= movie.release_year %>
-  </p>
+    <p class="card-text">
+      <strong><%= t('activerecord.attributes.movie.description') %>:</strong>
+      <%= movie.description %>
+    </p>
 
+    <p class="card-text">
+      <strong><%= t('activerecord.attributes.movie.release_year') %>:</strong>
+      <%= movie.release_year %>
+    </p>
+  </div>
 </div>

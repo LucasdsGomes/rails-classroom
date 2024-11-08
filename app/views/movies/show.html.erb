@@ -2,9 +2,8 @@
 
 <%= render @movie %>
 
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
-
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
+<div class="button-group mt-3">
+  <%= link_to t('helpers.submit.edit'), edit_movie_path(@movie), class: "btn btn-primary me-2 mb-3" %> 
+  <%= link_to t('activerecord.attributes.movie.buttons.back'), movies_path, class: "btn btn-secondary me-2 mb-3" %>
+  <%= button_to t('helpers.submit.destroy'), @movie, method: :delete, data: { confirm: 'Tem certeza de que deseja excluir este filme?' }, class: 'btn btn-danger btn-sm' %>
 </div>

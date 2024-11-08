@@ -1,0 +1,16 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'node_modules/*'
+    - 'vendor/**/*'
+    - 'config/**/*'
+
+Rails:
+  Enabled: true

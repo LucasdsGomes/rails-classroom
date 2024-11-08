@@ -1,10 +1,10 @@
-<h1>Editing movie</h1>
+<h1><%= t('activerecord.attributes.movie.titles.editing') %></h1>
 
 <%= render "form", movie: @movie %>
 
 <br>
 
-<div>
-  <%= link_to "Show this movie", @movie %> |
-  <%= link_to "Back to movies", movies_path %>
+<div class="button-group mt-3">
+  <%= link_to t('activerecord.attributes.movie.buttons.show'), @movie, class: "btn btn-primary me-2" %>
+  <%= link_to t('activerecord.attributes.movie.buttons.back'), movies_path, class: "btn btn-secondary" %>
 </div>
