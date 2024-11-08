@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 class MoviesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_movie, only: %i[show edit update destroy]
+  before_action :set_movie, only: %i[show edit update destroy destroy_photo]
 
   # GET /movies or /movies.json
   def index
@@ -11,7 +9,6 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
-    @movie = Movie.find(params[:id])
   end
 
   # GET /movies/new
@@ -20,7 +17,8 @@ class MoviesController < ApplicationController
   end
 
   # GET /movies/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /movies or /movies.json
   def create
@@ -28,7 +26,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if MovieService.save(@movie)
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.html { redirect_to @movie, notice: "Filme criado com sucesso!" }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +39,7 @@ class MoviesController < ApplicationController
   def update
     respond_to do |format|
       if MovieService.update(@movie, movie_params)
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
+        format.html { redirect_to @movie, notice: "Filme atualizado com sucesso!" }
         format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,29 +51,32 @@ class MoviesController < ApplicationController
   # DELETE /movies/1 or /movies/1.json
   def destroy
     MovieService.delete(@movie)
-
     respond_to do |format|
-      format.html { redirect_to movies_path, status: :see_other, notice: 'Movie was successfully destroyed.' }
+      format.html { redirect_to movies_path, status: :see_other, notice: "Filme removido com sucesso!" }
       format.json { head :no_content }
     end
   end
 
-  # Use callbacks to share common setup or constraints between actions.
+  # DELETE /movies/:id/photos/:photo_id
+  def destroy_photo
+    photo = @movie.photos.find_by_id(params[:photo_id])
+    if photo
+      photo.purge # Remove a foto do armazenamento
+      redirect_to movie_path(@movie), notice: 'Foto removida com sucesso.'
+    else
+      redirect_to movie_path(@movie), alert: 'Foto não encontrada.'
+    end
+  end
+
   private
 
+  # Use callbacks to share common setup or constraints between actions.
   def set_movie
     @movie = MovieFilter.search_by_id(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def movie_params
-    params.require(:movie).permit(:title, :director, :release_date, photos: []) # :description
-  end
-
-  def destroy_photo
-    @movie = Movie.find(params[:id])
-    photo = @movie.photos.find_by_id(params[:photo_id])
-    photo.purge # Remove a foto do Active Storage
-    redirect_to movie_path(@movie), notice: 'Foto removida com sucesso.'
+    params.require(:movie).permit(:title, :description, :release_year, photos: [])
   end
 end

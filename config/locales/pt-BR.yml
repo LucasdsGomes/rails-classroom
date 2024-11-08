@@ -1,11 +1,27 @@
 pt-BR:
   activerecord:
+
     models:
       movie: Filme
-
+    
     attributes:
       index: Lista de filmes
       movie:
         title: Título
-        decription: Descrição
-        release_year: Data de lançamento
+        description: Descrição
+        release_year: Data de Lançamento
+        buttons: 
+          back: Voltar
+          show: Ver Detalhes
+          new:  Novo Filme
+          
+        titles:
+          editing: Editar Filme
+          new:  Novo Filme
+  helpers:
+    submit:
+      edit: Editar Filme
+      create: Criar Filme
+      update: Atualizar Filme
+      submit: Salvar
+      destroy:  Excluir Filme

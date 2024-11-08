@@ -1,18 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<p> Olá <%=user_signed_in? ? current_user.email : 'visitante' %></p> 
-
-<%= button_to "Sair", destroy_user_session_path, method: :delete %>
-
-<h1><%= t('activerecord.attributes.index') %></h1>
+<h1 class="text-center"><%= t('activerecord.attributes.index') %></h1>
 
 <div id="movies">
   <% @movies.each do |movie| %>
     <%= render movie %>
     <p>
-      <%= link_to "Show this movie", movie %>
+      <%= link_to t('activerecord.attributes.movie.buttons.show'), movie, class: "btn btn-primary btn-sm" %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New movie", new_movie_path %>
+<div class="text-center mt-4">
+  <%= link_to t('activerecord.attributes.movie.buttons.new'), new_movie_path, class: "btn btn-success btn-lg" %>
+</div>

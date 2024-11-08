@@ -1,8 +1,7 @@
-<%= form_with(model: movie) do |form| %>
+<%= form_with(model: movie, class: "needs-validation", local: true) do |form| %>
   <% if movie.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(movie.errors.count, "erro") %> impedem que o filme seja salvo:</h4>
       <ul>
         <% movie.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Digite o título do filme" %>
   </div>
 
-  <div class="field">
-    <%= form.label :photos %>
-    <%= form.file_field :photos, multiple: true, direct_upload: true %>
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", placeholder: "Digite a descrição do filme" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="mb-3">
+    <%= form.label :release_year, class: "form-label" %>
+    <%= form.date_field :release_year, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :release_year, style: "display: block" %>
-    <%= form.date_field :release_year %>
+  <div class="mb-3">
+    <%= form.label :photos, class: "form-label" %>
+    <%= form.file_field :photos, class: "form-control", multiple: true, direct_upload: true %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="d-grid gap-2">
+    <%= form.submit t('helpers.submit.create'), class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -5,10 +5,10 @@ require:
 
 AllCops:
   NewCops: enable
-  Exclude: 
+  Exclude:
     - 'db/schema.rb'
     - 'bin/*'
-    - 'node_modules/**/*'
+    - 'node_modules/*'
     - 'vendor/**/*'
     - 'config/**/*'
 
